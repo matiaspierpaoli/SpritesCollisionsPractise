@@ -51,7 +51,17 @@ public class SpriteMovement : MonoBehaviour
         if (minPosViewPort.y <= 0)
             spr.transform.position = new Vector3(transform.position.x, worldBoundsMax.y - spr.bounds.extents.y, transform.position.z);
 
+        
 
     }
+
+    //private void Absorb()
+    //{
+    //     private GameObject player;
+    //  private float force;
+
+    //  Vector3 absorbVector = (gameObject.t.p - player.t.p).normalized;
+    //  player.t.p += absorbVector* Time.deltaTime * force;
+    //}
 
 }
