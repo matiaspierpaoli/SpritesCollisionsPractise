@@ -6,12 +6,14 @@ public class SpriteMovement : MonoBehaviour
 {
     [SerializeField] private float speed;
     private SpriteRenderer spr;
-    Vector3 worldBounds;
+    Vector3 worldBoundsMax;
+    Vector3 worldBoundsMin;
 
     private void Awake()
     {
         spr = GetComponent<SpriteRenderer>();       
-        worldBounds = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, 0));
+        worldBoundsMax = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, 0));
+        worldBoundsMin = Camera.main.ScreenToWorldPoint(new Vector3(0, 0, 0));       
     }
 
     private void FixedUpdate()
@@ -38,16 +40,16 @@ public class SpriteMovement : MonoBehaviour
         Vector3 minPosViewPort = Camera.main.WorldToViewportPoint(minPosWorld);
 
         if (maxPosViewPort.x >= 1)
-            spr.transform.position = new Vector3(-transform.position.x, transform.position.y, transform.position.z);
+            spr.transform.position = new Vector3(worldBoundsMin.x + spr.bounds.extents.x, transform.position.y, transform.position.z);
 
         if (minPosViewPort.x <= 0)
-            spr.transform.position = new Vector3(transform.position.x + worldBounds.x, transform.position.y, transform.position.z);
+            spr.transform.position = new Vector3(worldBoundsMax.x - spr.bounds.extents.x, transform.position.y, transform.position.z);
 
         if (maxPosViewPort.y >= 1)
-            spr.transform.position = new Vector3(transform.position.x, transform.position.y - worldBounds.y, transform.position.z);
+            spr.transform.position = new Vector3(transform.position.x, worldBoundsMin.y + spr.bounds.extents.y, transform.position.z);
         
         if (minPosViewPort.y <= 0)
-            spr.transform.position = new Vector3(transform.position.x, -transform.position.y, transform.position.z);
+            spr.transform.position = new Vector3(transform.position.x, worldBoundsMax.y - spr.bounds.extents.y, transform.position.z);
 
 
     }
