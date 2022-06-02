@@ -55,13 +55,6 @@ public class SpriteMovement : MonoBehaviour
 
     }
 
-    //private void Absorb()
-    //{
-    //     private GameObject player;
-    //  private float force;
-
-    //  Vector3 absorbVector = (gameObject.t.p - player.t.p).normalized;
-    //  player.t.p += absorbVector* Time.deltaTime * force;
-    //}
+    
 
 }
